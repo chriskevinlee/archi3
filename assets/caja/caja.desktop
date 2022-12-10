@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Caja
+Comment=File Manager
+GenericName=File Manager
+Exec=/usr/bin/caja
+Icon=/usr/share/caja/patterns/caja.png
+Type=Application
+Path=/usr/bin
+Path=/usr/bin
