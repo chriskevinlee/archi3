@@ -114,6 +114,7 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 					chmod u+x /home/"$sudo_user"/.config/polybar/launch.sh
 					cp assets/polybar/config.ini /home/"$sudo_user"/.config/polybar/
 					cp -r assets/polybar/scripts/ /home/"$sudo_user"/.config/polybar/
+					chmod +x /home/"$sudo_user"/.config/polybar/scripts/*
 				fi
 				pacman -S --noconfirm pacman-contrib
 				pacman -S --noconfirm pipewire-pulse
@@ -156,7 +157,8 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 				cp assets/nitrogen/USER_NAME_CRONTAB /var/spool/cron/"$sudo_user"
 				chown "$sudo_user":"$sudo_user" /var/spool/cron/"$sudo_user"
 				cp assets/nitrogen/feh_wallpaper.sh /home/$sudo_user/.config/feh_wallpaper.sh
-				###### add feh_wallpaper.sh here
+				chmod +x /home/$sudo_user/.config/feh_wallpaper.sh
+
 
 				pacman -S --noconfirm themix-full-fit
 				pacman -S --noconfirm lxappearance
