@@ -10,7 +10,4 @@
 
 
 # Will apply a random wallpaper every minute from the root directory recursively which nitrogen is pointing at
-# */1 * * * * export DISPLAY=:0 && nitrogen --random --set-zoom-fill
-
-# Will apply a random wallpaper every minute from given directory
-#*/1 * * * * export DISPLAY=:0 && nitrogen --random $HOME/.config/nitrogen/wallpapers/wallpaper_dir_name --set-zoom-fill
+ */1 * * * * DISPLAY=:0 /home/chris/.config/feh_wallpaper.sh

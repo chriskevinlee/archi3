@@ -149,14 +149,14 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 					cp assets/nitrogen/bg-saved.cfg /home/"$sudo_user"/.config/nitrogen/
 					sed -i "s,/HOME,/home/$sudo_user,g" /home/"$sudo_user"/.config/nitrogen/bg-saved.cfg
 					cp -r assets/nitrogen/wallpapers /home/"$sudo_user"/.config/nitrogen/
-					#cp assets/nitrogen/USER_NAME_CRONTAB /var/spool/cron/"$sudo_user"
-					#chown "$sudo_user":"$sudo_user" /var/spool/cron/"$sudo_user"
 					chown -R "$sudo_user":"$sudo_user" /home/"$sudo_user"/.config
 					pacman -S --noconfirm cronie
 					systemctl enable cronie
 				fi
 				cp assets/nitrogen/USER_NAME_CRONTAB /var/spool/cron/"$sudo_user"
 				chown "$sudo_user":"$sudo_user" /var/spool/cron/"$sudo_user"
+				cp assets/nitrogen/feh_wallpaper.sh /home/$sudo_user/.config/feh_wallpaper.sh
+				###### add feh_wallpaper.sh here
 
 				pacman -S --noconfirm themix-full-fit
 				pacman -S --noconfirm lxappearance
@@ -188,6 +188,7 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 				pacman -S --noconfirm picom # compositor for transparency etc..
 				pacman -S --noconfirm xdg-user-dirs # auto create user dirs
 				pacman -S --noconfirm base-devel
+				pacman -S --noconfirm feh
 
 				mkdir /home/$sudo_user/.config/alacritty/
 				cp assets/alacritty/alacritty.yml /home/$sudo_user/.config/alacritty/
