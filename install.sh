@@ -71,6 +71,8 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 				clear
 				fi
 				;;
+
+
 			"Install i3 with Requirements" )
 				clear
 				while [[ -z "$sudo_user" ]]; do
@@ -110,11 +112,9 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 				pacman -S --noconfirm polybar
 				if [[ ! -d /home/"$sudo_user"/.config/polybar ]]; then
 					mkdir /home/"$sudo_user"/.config/polybar
-					cp assets/polybar/launch.sh /home/"$sudo_user"/.config/polybar/
-					chmod u+x /home/"$sudo_user"/.config/polybar/launch.sh
 					cp assets/polybar/config.ini /home/"$sudo_user"/.config/polybar/
-					cp -r assets/polybar/scripts/ /home/"$sudo_user"/.config/polybar/
-					chmod +x /home/"$sudo_user"/.config/polybar/scripts/*
+					cp assets/polybar/launch.sh /home/"$sudo_user"/.config/polybar/
+					chmod +x /home/"$sudo_user"/.config/polybar/launch.sh
 				fi
 				pacman -S --noconfirm pacman-contrib
 				pacman -S --noconfirm pipewire-pulse
@@ -127,22 +127,13 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
                     mkdir /home/"$sudo_user"/.config/rofi
                     cp assets/rofi/chrislee_dark.rasi /home/"$sudo_user"/.config/rofi/chrislee_dark.rasi
                     cp assets/rofi/config.rasi /home/"$sudo_user"/.config/rofi/config.rasi
-                    cp assets/ssh_connections/ssh_connections.sh /home/"$sudo_user"/.config
-                    mkdir /home/"$sudo_user"/.ssh
-                    cp assets/ssh_connections/config /home/"$sudo_user"/.ssh/config
-                    chown -R $sudo_user":$sudo_user" /home/"$sudo_user"/.ssh/
                 fi
 
 				pacman -S --noconfirm papirus-icon-theme # icons for rofi menu
 
-	    		# This block of code will install nitrogen then create a .config directory if it does NOT exist
-				pacman -S --noconfirm nitrogen
-				if [[ ! -d /home/"$sudo_user"/.config ]]; then
-					mkdir /home/"$sudo_user"/.config
-				fi
-
 				# This block of code will check to see if nitrogen directory does NOT exist then create a directory for sudo_user variable, then
 				# copy configs files to set a wallpaper and the wallpaper paths
+				pacman -S --noconfirm nitrogen
 				if [[ ! -d /home/"$sudo_user"/.config/nitrogen/ ]]; then
 					mkdir /home/"$sudo_user"/.config/nitrogen/
 					cp assets/nitrogen/nitrogen.cfg /home/"$sudo_user"/.config/nitrogen/
@@ -150,15 +141,12 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 					cp assets/nitrogen/bg-saved.cfg /home/"$sudo_user"/.config/nitrogen/
 					sed -i "s,/HOME,/home/$sudo_user,g" /home/"$sudo_user"/.config/nitrogen/bg-saved.cfg
 					cp -r assets/nitrogen/wallpapers /home/"$sudo_user"/.config/nitrogen/
-					chown -R "$sudo_user":"$sudo_user" /home/"$sudo_user"/.config
-					pacman -S --noconfirm cronie
-					systemctl enable cronie
 				fi
-				cp assets/nitrogen/USER_NAME_CRONTAB /var/spool/cron/"$sudo_user"
-				chown "$sudo_user":"$sudo_user" /var/spool/cron/"$sudo_user"
-				cp assets/nitrogen/feh_wallpaper.sh /home/$sudo_user/.config/feh_wallpaper.sh
-				chmod +x /home/$sudo_user/.config/feh_wallpaper.sh
 
+				pacman -S --noconfirm cronie
+				systemctl enable cronie
+				cp assets/cronie/USER_NAME_CRONTAB /var/spool/cron/"$sudo_user"
+				chown "$sudo_user":"$sudo_user" /var/spool/cron/"$sudo_user"
 
 				pacman -S --noconfirm themix-full-fit
 				pacman -S --noconfirm lxappearance
@@ -167,21 +155,14 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 				pacman -S --noconfirm qt5ct
 				pacman -S --noconfirm qt6ct
 
-
 				cp assets/theme/environment /etc/environment
-				sleep 3 # for testing
 				mkdir /home/$sudo_user/.config/gtk-3.0/
 				cp assets/theme/settings.ini /home/$sudo_user/.config/gtk-3.0/settings.ini
-				sleep 3 # for testing
 				cp -r assets/theme/qt5ct /home/$sudo_user/.config/
-				sleep 3 # for testing
 				cp -r assets/theme/qt6ct /home/$sudo_user/.config/
-				sleep 3 # for testing
 				mkdir /home/$sudo_user/.themes
 				cp -r assets/theme/oomox-Bluloco-dark /home/$sudo_user/.themes
 				
-
-
 				pacman -S --noconfirm nano-syntax-highlighting
 				pacman -S --noconfirm lsd
 				pacman -S --noconfirm alacritty # added as a defalut terminal
@@ -194,9 +175,15 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 
 				mkdir /home/$sudo_user/.config/alacritty/
 				cp assets/alacritty/alacritty.yml /home/$sudo_user/.config/alacritty/
-				cp assets/bashrc/MY.bashrc /home/$sudo_user/.bashrc
-				chown -R $sudo_user:$sudo_user /home/$sudo_user/.config
+				mkdir /home/"$sudo_user"/.ssh
+                cp assets/ssh_connections/config /home/"$sudo_user"/.ssh/config
+                chown -R $sudo_user":$sudo_user" /home/"$sudo_user"/.ssh/
 
+                cp -R assets/scripts /home/$sudo_user/.config/
+                chown -R $sudo_user:$sudo_user /home/$sudo_user/.config
+                chmod -R +x /home/$sudo_user/.config/scripts/*
+
+                cp assets/bashrc/MY.bashrc /home/$sudo_user/.bashrc
 
 				pacman -S --noconfirm git
 				pacman -S --noconfirm make
@@ -211,8 +198,11 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 				 sudo -u "$sudo_user" yay -S --noconfirm xfce-polkit # added this to allow power,reboot and open apps that need sudo without a password
 				 sudo -u "$sudo_user" yay -S --noconfirm shell-color-scripts
 				cd $cd_from_yay_dir
+				localectl --no-convert set-x11-keymap gb pc104 ,qwerty grp:win_space_toogle
 				clear
 				;;
+
+				
 			"Install Packages" )
 				clear
 				while [[ -z "$sudo_user" ]]; do
@@ -231,7 +221,7 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 				echo "Package Menu: Choose a Number to Install a Package(ONE Number at a Time)"
 				echo "======================================================================================================="
 				echo "                                                                                                       "
-				options=("Alacritty(Installed by 'Install i3 with Requirements')" "Firefox(Installed by 'Install i3 with Requirements')" "VLC" "Gparted" "GIMP" "VirtualBox" "Audacity" "Discord" "FileZilla" "qBittorrent" "Ranger" "ARandR" "Caja" "Tilda" "Opera" "TeamViewer(AUR)" "Sublime Text 4(AUR)" "Brave(AUR)" "TimeShift(AUR)" "Install All" "Back" "Reboot" "Poweroff" "Exit Script")
+				options=("Alacritty(Installed by 'Install i3 with Requirements')" "Firefox(Installed by 'Install i3 with Requirements')" "VLC" "Gparted" "GIMP" "VirtualBox" "virt manager (kvm)" "Audacity" "Discord" "FileZilla" "qBittorrent" "Ranger" "ARandR" "Caja" "Tilda" "Opera" "TeamViewer(AUR)" "Sublime Text 4(AUR)" "Brave(AUR)" "TimeShift(AUR)" "Install All" "Back" "Reboot" "Poweroff" "Exit Script")
 				select packages in "${options[@]}"
 				do
 					case $packages in
@@ -257,6 +247,12 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 							;;
 						"VirtualBox" )
 							pacman -S --noconfirm virtualbox
+							clear
+							;;
+						"virt manager (kvm)" )
+							pacman -S --noconfirm qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat iptables libguestfs qemu-emulators-full
+							usermod -aG libvirt $sudo_user
+							systemctl enable libvirtd
 							clear
 							;;
 						"Audacity" )
@@ -325,6 +321,9 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 							pacman -S --noconfirm gparted					
 							pacman -S --noconfirm gimp
 							pacman -S --noconfirm virtualbox
+							pacman -S --noconfirm qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat iptables libguestfs qemu-emulators-full
+							usermod -aG libvirt $sudo_user
+							systemctl enable libvirtd
 							pacman -S --noconfirm audacity
 							pacman -S --noconfirm discord
 							pacman -S --noconfirm filezilla						
