@@ -71,8 +71,6 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 				clear
 				fi
 				;;
-
-
 			"Install i3 with Requirements" )
 				clear
 				while [[ -z "$sudo_user" ]]; do
@@ -200,9 +198,7 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 				cd $cd_from_yay_dir
 				localectl --no-convert set-x11-keymap gb pc104 ,qwerty grp:win_space_toogle
 				clear
-				;;
-
-				
+				;;	
 			"Install Packages" )
 				clear
 				while [[ -z "$sudo_user" ]]; do
@@ -351,19 +347,48 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 							sudo -u "$sudo_user" yay -S --noconfirm brave-bin
 
 							sudo -u "$sudo_user" yay -S --noconfirm timeshift
-							# timeshift --create --comments "Snapshot created by install script after installation completed"
 							clear
 							;;
 						"Back" )
 							exec "$script_dir"/"$script_file"
 							;;
 						"Reboot" )
+							if [[ -f /usr/bin/timeshift ]]; then
+								read -p "Would you like to create a snapshot with timeshift? " timeshift
+								while [[ $timeshift != y ]] && [[ $timeshift != n ]]; do
+									echo "Please Enter y or n"
+									read -p "Would you like to create a snapshot with timeshift? " timeshift
+								done
+								if [[ $timeshift = y ]]; then
+									timeshift --create --comments "Snapshot created by install script after installation completed"
+								fi
+							fi
 							reboot
 							;;			
 						"Poweroff" )
+								if [[ -f /usr/bin/timeshift ]]; then
+								read -p "Would you like to create a snapshot with timeshift? " timeshift
+								while [[ $timeshift != y ]] && [[ $timeshift != n ]]; do
+									echo "Please Enter y or n"
+									read -p "Would you like to create a snapshot with timeshift? " timeshift
+								done
+								if [[ $timeshift = y ]]; then
+									timeshift --create --comments "Snapshot created by install script after installation completed"
+								fi
+							fi
 							poweroff
 							;;
 						"Exit Script" )
+							if [[ -f /usr/bin/timeshift ]]; then
+								read -p "Would you like to create a snapshot with timeshift? " timeshift
+								while [[ $timeshift != y ]] && [[ $timeshift != n ]]; do
+									echo "Please Enter y or n"
+									read -p "Would you like to create a snapshot with timeshift? " timeshift
+								done
+								if [[ $timeshift = y ]]; then
+									timeshift --create --comments "Snapshot created by install script after installation completed"
+								fi
+							fi
 							exit
 							;;
 					esac
@@ -372,12 +397,42 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 				clear
 				;;
 			"Reboot" )
+				if [[ -f /usr/bin/timeshift ]]; then
+					read -p "Would you like to create a snapshot with timeshift? " timeshift
+					while [[ $timeshift != y ]] && [[ $timeshift != n ]]; do
+						echo "Please Enter y or n"
+						read -p "Would you like to create a snapshot with timeshift? " timeshift
+					done
+					if [[ $timeshift = y ]]; then
+						timeshift --create --comments "Snapshot created by install script after installation completed"
+					fi
+				fi
 				reboot
 				;;			
 			"Poweroff" )
+				if [[ -f /usr/bin/timeshift ]]; then
+					read -p "Would you like to create a snapshot with timeshift? " timeshift
+					while [[ $timeshift != y ]] && [[ $timeshift != n ]]; do
+						echo "Please Enter y or n"
+						read -p "Would you like to create a snapshot with timeshift? " timeshift
+					done
+					if [[ $timeshift = y ]]; then
+						timeshift --create --comments "Snapshot created by install script after installation completed"
+					fi
+				fi
 				poweroff
 				;;
 			"Exit Script" )
+				if [[ -f /usr/bin/timeshift ]]; then
+					read -p "Would you like to create a snapshot with timeshift? " timeshift
+					while [[ $timeshift != y ]] && [[ $timeshift != n ]]; do
+						echo "Please Enter y or n"
+						read -p "Would you like to create a snapshot with timeshift? " timeshift
+					done
+					if [[ $timeshift = y ]]; then
+						timeshift --create --comments "Snapshot created by install script after installation completed"
+					fi
+				fi
 				exit
 				;;
 		esac
