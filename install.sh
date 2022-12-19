@@ -245,7 +245,7 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 							pacman -S --noconfirm virtualbox
 							clear
 							;;
-						"virt manager (kvm)" )
+						"Virt Manager (KVM)" )
 							pacman -S --noconfirm qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat iptables libguestfs qemu-emulators-full
 							usermod -aG libvirt $sudo_user
 							systemctl enable libvirtd
