@@ -14,6 +14,7 @@ alias p='pacman'
 alias sp='sudo pacman'
 alias C='clear'
 alias s='sudo'
+alias nano='nano -l'
 
 # colorscript for terminal from DT(DistroTube) on YouTube.
 colorscript random
