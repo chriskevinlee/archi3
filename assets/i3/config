@@ -29,6 +29,9 @@
         # My Config: Start polybar at startup
         exec_always --no-startup-id /$HOME/.config/polybar/launch.sh
 
+        # My Config: Script to apply a random wallpaper see feh_wallpaper.sh for configuration
+        exec_always --no-startup-id /$HOME/.config/scripts/feh_wallpaper.sh
+
         # My Config: Start Rofi with keyboard shortcut
         bindsym $mod+d exec --no-startup-id rofi -display-drun "Apps " -show drun -icon-theme "Papirus" -show-icons
 

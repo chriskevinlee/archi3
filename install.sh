@@ -141,11 +141,6 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 					cp -r assets/nitrogen/wallpapers /home/"$sudo_user"/.config/nitrogen/
 				fi
 
-				pacman -S --noconfirm cronie
-				systemctl enable cronie
-				cp assets/cronie/USER_NAME_CRONTAB /var/spool/cron/"$sudo_user"
-				chown "$sudo_user":"$sudo_user" /var/spool/cron/"$sudo_user"
-
 				pacman -S --noconfirm themix-full-fit
 				pacman -S --noconfirm lxappearance
 				pacman -S --noconfirm qt5
