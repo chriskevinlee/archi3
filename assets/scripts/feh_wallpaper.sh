@@ -7,7 +7,7 @@
 # Use yes to activate or no to deactivate
 active=no
 
-# Directory path to Wallpapers
+# Directory path to Wallpapers, maybe to add * at the end of a path
 path=/home/$USER/.config/nitrogen/wallpapers/*
 
 # Set the amount in seconds
