@@ -11,7 +11,7 @@ active=no
 path=/home/$USER/.config/nitrogen/wallpapers/*
 
 # Set the amount in seconds
-time=10
+time=600
 
 # This allows for the user to edit the file and for the script to rerun
 script_dir=$(dirname $BASH_SOURCE)
