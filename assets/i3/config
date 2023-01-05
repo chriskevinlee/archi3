@@ -24,14 +24,17 @@
         # My Config: Start drop down tilda terminal at login
         exec --no-startup-id tilda
 
-        # My Config: Restore Nitrogen wallpaper
+        # My Config: Restore Nitrogen wallpaper, may need to comment out if using feh_wallpaper.sh
         exec --no-startup-id nitrogen --restore
+
+        # My Config: Script to apply a random wallpaper see feh_wallpaper.sh for configuration. 
+        # You will need to comment out "Restore Nitrogen wallpaper" to apply feh_wallpaper at login 
+        # otherwise "Restore Nitrogen wallpaper" will apply over feh_wallpaper at login. No need to 
+        # comment out line below as if feh_wallpaper.sh is set to "no" nothing will apply. 
+        exec --no-startup-id /$HOME/.config/scripts/feh_wallpaper.sh
 
         # My Config: Start polybar at startup
         exec_always --no-startup-id /$HOME/.config/polybar/launch.sh
-
-        # My Config: Script to apply a random wallpaper see feh_wallpaper.sh for configuration
-        exec --no-startup-id /$HOME/.config/scripts/feh_wallpaper.sh
 
         # My Config: Start Rofi with keyboard shortcut
         bindsym $mod+d exec --no-startup-id rofi -display-drun "Apps " -show drun -icon-theme "Papirus" -show-icons
