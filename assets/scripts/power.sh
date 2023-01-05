@@ -13,7 +13,7 @@ case "$chosen" in
     			yes_no=$(printf "no\nyes" | rofi -p "Would You Like to $chosen" -dmenu -i -theme-str)
     			case $yes_no in
         			[no]* ) exit;;
-        			[yes]* ) i3-msg exit;;
+        			[yes]* ) pkill feh_wallpaper & i3-msg exit;;
     			esac;;    			
     	" Reboot") 
     			yes_no=$(printf "no\nyes" | rofi -p "Would You Like to $chosen" -dmenu -i -theme-str)
