@@ -239,6 +239,7 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 						"VirtualBox" )
 							pacman -S --noconfirm virtualbox
 							pacman -S --noconfirm virtualbox-host-modules-arch
+       							pacman -S --noconfirm linux-headers
 							clear
 							;;
 						"Virt Manager (KVM)" )
@@ -314,6 +315,7 @@ if [[ $yesdoisay = "YES! do as i say" ]]; then
 							pacman -S --noconfirm gimp
 							pacman -S --noconfirm virtualbox
 							pacman -S --noconfirm virtualbox-host-modules-arch
+       							pacman -S --noconfirm linux-headers
 							pacman -S --noconfirm qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat iptables libguestfs qemu-emulators-full
 							usermod -aG libvirt $sudo_user
 							systemctl enable libvirtd
